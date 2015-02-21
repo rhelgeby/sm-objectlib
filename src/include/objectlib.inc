@@ -239,7 +239,7 @@ enum ObjLibError
  * @param typeDescriptor    Related type descriptor.
  * @param errorType         Type of error.
  * @param message           Error message.
- * @param object            Related object, if available.
+ * @param obj               Related object, if available.
  * @param data              Data bundle with additional data, if available.
  *                          If the error is originating from the KeyValue parser
  *                          it's a reference to the parser context object. You
@@ -255,7 +255,7 @@ enum ObjLibError
  *                          * Other values are treated as if Plugin_Handled was
  *                            returned, parsing will be aborted.
  */
-functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:object, Object:data);
+functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:obj, Object:data);
 
 /*____________________________________________________________________________*/
 
@@ -271,7 +271,7 @@ functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError
  * Note that all other custom constraints are disabled inside this callback.
  * This prevents infinite recursion if the value is overridden.
  *
- * @param object            Object being validated.
+ * @param obj               Object being validated.
  * @param typeDescriptor    Object type (meta data).
  * @param keyName           Key being validated.
  * @param dataType          Type of key.
@@ -282,7 +282,7 @@ functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError
  * @return                  See ObjectConstraintResult. It returns whether the
  *                          value is valid, invalid or overridden.
  */
-functag public ObjectConstraintResult:ObjLib_KeyValidator(Object:object, ObjectType:typeDescriptor, const String:keyName[], ObjectDataType:dataType, const any:values[], size);
+functag public ObjectConstraintResult:ObjLib_KeyValidator(Object:obj, ObjectType:typeDescriptor, const String:keyName[], ObjectDataType:dataType, const any:values[], size);
 
 /*____________________________________________________________________________*/
 
@@ -297,7 +297,7 @@ funcenum ObjLibLookupCallback
      * Lookup callback for value lookup constraint handler. Used to convert a
      * string into a value.
      *
-     * @param object            Object being validated.
+     * @param obj               Object being validated.
      * @param index             Index of key, or index where collection element
      *                          will be added.
      * @param lookup            String value to look up.
@@ -306,13 +306,13 @@ funcenum ObjLibLookupCallback
      * @return                  True if lookup value was valid and successfully
      *                          converted, false otherwise.
      */
-    bool:public(Object:object, index, const String:lookup[], &any:replacement),
+    bool:public(Object:obj, index, const String:lookup[], &any:replacement),
     
     /**
      * Lookup callback for array lookup constraint handler. Used to convert a
      * string into an array.
      *
-     * @param object            Object being validated.
+     * @param obj               Object being validated.
      * @param index             Index of key, or index where collection element
      *                          will be added.
      * @param lookup            String value to look up.
@@ -322,13 +322,13 @@ funcenum ObjLibLookupCallback
      * @return                  Number of cells copied to replacement array if
      *                          value was valid, or -1 if value was invalid.
      */
-    public(Object:object, index, const String:lookup[], any:replacement[], maxlen),
+    public(Object:obj, index, const String:lookup[], any:replacement[], maxlen),
     
     /**
      * Lookup callback for string lookup constraint handler. Used to convert a
      * string into another string.
      *
-     * @param object            Object being validated.
+     * @param obj               Object being validated.
      * @param index             Index of key, or index where collection element
      *                          will be added.
      * @param lookup            String value to look up.
@@ -338,7 +338,7 @@ funcenum ObjLibLookupCallback
      * @return                  Number of characters copied to replacement array
      *                          if value was valid, or -1 if value was invalid.
      */
-    public(Object:object, index, const String:lookup[], String:replacement[], maxlen)
+    public(Object:obj, index, const String:lookup[], String:replacement[], maxlen)
 };
 
 /*____________________________________________________________________________*/

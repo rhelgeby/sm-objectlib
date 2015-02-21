@@ -32,7 +32,7 @@
 /**
  * Gets a value of type "any" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -41,16 +41,16 @@
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock any:ObjLib_GetAny(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock any:ObjLib_GetAny(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_GetAnyAt(object, keyIndex, errorHandler);
+    return ObjLib_GetAnyAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -58,7 +58,7 @@ stock any:ObjLib_GetAny(Object:object, const String:keyName[], ObjLib_ErrorHandl
 /**
  * Sets a value of type "any" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -66,16 +66,16 @@ stock any:ObjLib_GetAny(Object:object, const String:keyName[], ObjLib_ErrorHandl
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetAny(Object:object, const String:keyName[], any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetAny(Object:obj, const String:keyName[], any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetAnyAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetAnyAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -83,7 +83,7 @@ stock ObjLib_SetAny(Object:object, const String:keyName[], any:value, ObjLib_Err
 /**
  * Gets a value of type "cell" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -92,16 +92,16 @@ stock ObjLib_SetAny(Object:object, const String:keyName[], any:value, ObjLib_Err
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_GetCell(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetCell(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_GetCellAt(object, keyIndex, errorHandler);
+    return ObjLib_GetCellAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -109,7 +109,7 @@ stock ObjLib_GetCell(Object:object, const String:keyName[], ObjLib_ErrorHandler:
 /**
  * Sets a value of type "cell" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -117,16 +117,16 @@ stock ObjLib_GetCell(Object:object, const String:keyName[], ObjLib_ErrorHandler:
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetCell(Object:object, const String:keyName[], any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetCell(Object:obj, const String:keyName[], any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetCellAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetCellAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -134,7 +134,7 @@ stock ObjLib_SetCell(Object:object, const String:keyName[], any:value, ObjLib_Er
 /**
  * Gets a value of type "bool" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -143,16 +143,16 @@ stock ObjLib_SetCell(Object:object, const String:keyName[], any:value, ObjLib_Er
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock bool:ObjLib_GetBool(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock bool:ObjLib_GetBool(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return false;
     }
     
-    return ObjLib_GetBoolAt(object, keyIndex, errorHandler);
+    return ObjLib_GetBoolAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -160,7 +160,7 @@ stock bool:ObjLib_GetBool(Object:object, const String:keyName[], ObjLib_ErrorHan
 /**
  * Sets a value of type "bool" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -168,16 +168,16 @@ stock bool:ObjLib_GetBool(Object:object, const String:keyName[], ObjLib_ErrorHan
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetBool(Object:object, const String:keyName[], bool:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetBool(Object:obj, const String:keyName[], bool:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetBoolAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetBoolAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -185,7 +185,7 @@ stock ObjLib_SetBool(Object:object, const String:keyName[], bool:value, ObjLib_E
 /**
  * Gets a value of type "float" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -194,16 +194,16 @@ stock ObjLib_SetBool(Object:object, const String:keyName[], bool:value, ObjLib_E
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock Float:ObjLib_GetFloat(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Float:ObjLib_GetFloat(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0.0;
     }
     
-    return ObjLib_GetFloatAt(object, keyIndex, errorHandler);
+    return ObjLib_GetFloatAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -211,7 +211,7 @@ stock Float:ObjLib_GetFloat(Object:object, const String:keyName[], ObjLib_ErrorH
 /**
  * Sets a value of type "float" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -219,16 +219,16 @@ stock Float:ObjLib_GetFloat(Object:object, const String:keyName[], ObjLib_ErrorH
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetFloat(Object:object, const String:keyName[], Float:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetFloat(Object:obj, const String:keyName[], Float:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetFloatAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetFloatAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -236,7 +236,7 @@ stock ObjLib_SetFloat(Object:object, const String:keyName[], Float:value, ObjLib
 /**
  * Gets a value of type "handle" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -245,16 +245,16 @@ stock ObjLib_SetFloat(Object:object, const String:keyName[], Float:value, ObjLib
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock Handle:ObjLib_GetHandle(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Handle:ObjLib_GetHandle(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return INVALID_HANDLE;
     }
     
-    return ObjLib_GetHandleAt(object, keyIndex, errorHandler);
+    return ObjLib_GetHandleAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -262,7 +262,7 @@ stock Handle:ObjLib_GetHandle(Object:object, const String:keyName[], ObjLib_Erro
 /**
  * Sets a value of type "handle" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -270,16 +270,16 @@ stock Handle:ObjLib_GetHandle(Object:object, const String:keyName[], ObjLib_Erro
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetHandle(Object:object, const String:keyName[], Handle:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetHandle(Object:obj, const String:keyName[], Handle:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetHandleAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetHandleAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -287,7 +287,7 @@ stock ObjLib_SetHandle(Object:object, const String:keyName[], Handle:value, ObjL
 /**
  * Gets a value of type "function" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -296,16 +296,16 @@ stock ObjLib_SetHandle(Object:object, const String:keyName[], Handle:value, ObjL
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock Function:ObjLib_GetFunction(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Function:ObjLib_GetFunction(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return INVALID_FUNCTION;
     }
     
-    return ObjLib_GetFunctionAt(object, keyIndex, errorHandler);
+    return ObjLib_GetFunctionAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -313,7 +313,7 @@ stock Function:ObjLib_GetFunction(Object:object, const String:keyName[], ObjLib_
 /**
  * Sets a value of type "function" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -321,16 +321,16 @@ stock Function:ObjLib_GetFunction(Object:object, const String:keyName[], ObjLib_
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetFunction(Object:object, const String:keyName[], Function:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetFunction(Object:obj, const String:keyName[], Function:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetFunctionAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetFunctionAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -338,7 +338,7 @@ stock ObjLib_SetFunction(Object:object, const String:keyName[], Function:value, 
 /**
  * Gets a value of type "array" in the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param buffer        Destination buffer.
  * @param maxlen        Size of buffer.
@@ -349,16 +349,16 @@ stock ObjLib_SetFunction(Object:object, const String:keyName[], Function:value, 
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_GetArray(Object:object, const String:keyName[], any:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetArray(Object:obj, const String:keyName[], any:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_GetArrayAt(object, keyIndex, buffer, maxlen, errorHandler);
+    return ObjLib_GetArrayAt(obj, keyIndex, buffer, maxlen, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -366,7 +366,7 @@ stock ObjLib_GetArray(Object:object, const String:keyName[], any:buffer[], maxle
 /**
  * Sets a value of type "array" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param values        Array to set.
  * @param maxlen        Size of array.
@@ -377,16 +377,16 @@ stock ObjLib_GetArray(Object:object, const String:keyName[], any:buffer[], maxle
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetArray(Object:object, const String:keyName[], const any:values[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetArray(Object:obj, const String:keyName[], const any:values[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_SetArrayAt(object, keyIndex, values, maxlen, errorHandler);
+    return ObjLib_SetArrayAt(obj, keyIndex, values, maxlen, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -394,7 +394,7 @@ stock ObjLib_SetArray(Object:object, const String:keyName[], const any:values[],
 /**
  * Gets a value of type "string" in the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param buffer        Destination buffer.
  * @param maxlen        Size of buffer.
@@ -405,16 +405,16 @@ stock ObjLib_SetArray(Object:object, const String:keyName[], const any:values[],
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_GetString(Object:object, const String:keyName[], String:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetString(Object:obj, const String:keyName[], String:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_GetStringAt(object, keyIndex, buffer, maxlen, errorHandler);
+    return ObjLib_GetStringAt(obj, keyIndex, buffer, maxlen, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -422,7 +422,7 @@ stock ObjLib_GetString(Object:object, const String:keyName[], String:buffer[], m
 /**
  * Sets a value of type "string" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         String to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -432,16 +432,16 @@ stock ObjLib_GetString(Object:object, const String:keyName[], String:buffer[], m
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetString(Object:object, const String:keyName[], const String:value[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetString(Object:obj, const String:keyName[], const String:value[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return 0;
     }
     
-    return ObjLib_SetStringAt(object, keyIndex, value, errorHandler);
+    return ObjLib_SetStringAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -449,7 +449,7 @@ stock ObjLib_SetString(Object:object, const String:keyName[], const String:value
 /**
  * Gets a value of type "object" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -458,16 +458,16 @@ stock ObjLib_SetString(Object:object, const String:keyName[], const String:value
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock Object:ObjLib_GetObject(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Object:ObjLib_GetObject(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return INVALID_OBJECT;
     }
     
-    return ObjLib_GetObjectAt(object, keyIndex, errorHandler);
+    return ObjLib_GetObjectAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -475,7 +475,7 @@ stock Object:ObjLib_GetObject(Object:object, const String:keyName[], ObjLib_Erro
 /**
  * Sets a value of type "object" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -483,16 +483,16 @@ stock Object:ObjLib_GetObject(Object:object, const String:keyName[], ObjLib_Erro
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetObject(Object:object, const String:keyName[], Object:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetObject(Object:obj, const String:keyName[], Object:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetObjectAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetObjectAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -500,7 +500,7 @@ stock ObjLib_SetObject(Object:object, const String:keyName[], Object:value, ObjL
 /**
  * Gets a value of type "object type" from the specified key.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param keyName       Name of key. Case sensitive.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -509,16 +509,16 @@ stock ObjLib_SetObject(Object:object, const String:keyName[], Object:value, ObjL
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjectType:ObjLib_GetObjectType(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjectType:ObjLib_GetObjectType(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return INVALID_OBJECT_TYPE;
     }
     
-    return ObjLib_GetObjectTypeAt(object, keyIndex, errorHandler);
+    return ObjLib_GetObjectTypeAt(obj, keyIndex, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -526,7 +526,7 @@ stock ObjectType:ObjLib_GetObjectType(Object:object, const String:keyName[], Obj
 /**
  * Sets a value of type "object type" in the specified key.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param keyName       Name of key. Case sensitive.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -534,16 +534,16 @@ stock ObjectType:ObjLib_GetObjectType(Object:object, const String:keyName[], Obj
  *
  * @error               Invalid object, key name or key type mismatch.
  */
-stock ObjLib_SetObjectType(Object:object, const String:keyName[], ObjectType:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetObjectType(Object:obj, const String:keyName[], ObjectType:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName, errorHandler);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName, errorHandler);
     if (keyIndex < 0)
     {
         // Error was handled.
         return;
     }
     
-    ObjLib_SetObjectTypeAt(object, keyIndex, value, errorHandler);
+    ObjLib_SetObjectTypeAt(obj, keyIndex, value, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -551,7 +551,7 @@ stock ObjLib_SetObjectType(Object:object, const String:keyName[], ObjectType:val
 /**
  * Gets a value of type "any" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -560,27 +560,27 @@ stock ObjLib_SetObjectType(Object:object, const String:keyName[], ObjectType:val
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock any:ObjLib_GetAnyAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock any:ObjLib_GetAnyAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Any, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Any, errorHandler))
     {
         return 0;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return 0;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return any:GetArrayCell(data, index);
 }
 
@@ -589,7 +589,7 @@ stock any:ObjLib_GetAnyAt(Object:object, index, ObjLib_ErrorHandler:errorHandler
 /**
  * Sets a value of type "any" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -597,15 +597,15 @@ stock any:ObjLib_GetAnyAt(Object:object, index, ObjLib_ErrorHandler:errorHandler
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetAnyAt(Object:object, index, any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetAnyAt(Object:obj, index, any:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Any, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Any, errorHandler))
     {
         return;
     }
@@ -616,7 +616,7 @@ stock ObjLib_SetAnyAt(Object:object, index, any:value, ObjLib_ErrorHandler:error
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -624,7 +624,7 @@ stock ObjLib_SetAnyAt(Object:object, index, any:value, ObjLib_ErrorHandler:error
 /**
  * Gets a value of type "cell" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -633,27 +633,27 @@ stock ObjLib_SetAnyAt(Object:object, index, any:value, ObjLib_ErrorHandler:error
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_GetCellAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetCellAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Cell, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Cell, errorHandler))
     {
         return 0;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return 0;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return GetArrayCell(data, index);
 }
 
@@ -662,7 +662,7 @@ stock ObjLib_GetCellAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = 
 /**
  * Sets a value of type "cell" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -670,15 +670,15 @@ stock ObjLib_GetCellAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = 
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetCellAt(Object:object, index, value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetCellAt(Object:obj, index, value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Cell, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Cell, errorHandler))
     {
         return;
     }
@@ -689,7 +689,7 @@ stock ObjLib_SetCellAt(Object:object, index, value, ObjLib_ErrorHandler:errorHan
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -697,7 +697,7 @@ stock ObjLib_SetCellAt(Object:object, index, value, ObjLib_ErrorHandler:errorHan
 /**
  * Gets a value of type "bool" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -706,27 +706,27 @@ stock ObjLib_SetCellAt(Object:object, index, value, ObjLib_ErrorHandler:errorHan
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock bool:ObjLib_GetBoolAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock bool:ObjLib_GetBoolAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Bool, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Bool, errorHandler))
     {
         return false;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return false;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return bool:GetArrayCell(data, index);
 }
 
@@ -735,7 +735,7 @@ stock bool:ObjLib_GetBoolAt(Object:object, index, ObjLib_ErrorHandler:errorHandl
 /**
  * Sets a value of type "bool" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -743,15 +743,15 @@ stock bool:ObjLib_GetBoolAt(Object:object, index, ObjLib_ErrorHandler:errorHandl
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetBoolAt(Object:object, index, bool:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetBoolAt(Object:obj, index, bool:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Bool, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Bool, errorHandler))
     {
         return;
     }
@@ -762,7 +762,7 @@ stock ObjLib_SetBoolAt(Object:object, index, bool:value, ObjLib_ErrorHandler:err
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -770,7 +770,7 @@ stock ObjLib_SetBoolAt(Object:object, index, bool:value, ObjLib_ErrorHandler:err
 /**
  * Gets a value of type "float" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -779,27 +779,27 @@ stock ObjLib_SetBoolAt(Object:object, index, bool:value, ObjLib_ErrorHandler:err
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock Float:ObjLib_GetFloatAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Float:ObjLib_GetFloatAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Float, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Float, errorHandler))
     {
         return 0.0;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return 0.0;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return Float:GetArrayCell(data, index);
 }
 
@@ -808,7 +808,7 @@ stock Float:ObjLib_GetFloatAt(Object:object, index, ObjLib_ErrorHandler:errorHan
 /**
  * Sets a value of type "float" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -816,15 +816,15 @@ stock Float:ObjLib_GetFloatAt(Object:object, index, ObjLib_ErrorHandler:errorHan
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetFloatAt(Object:object, index, Float:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetFloatAt(Object:obj, index, Float:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Float, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Float, errorHandler))
     {
         return;
     }
@@ -835,7 +835,7 @@ stock ObjLib_SetFloatAt(Object:object, index, Float:value, ObjLib_ErrorHandler:e
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -843,7 +843,7 @@ stock ObjLib_SetFloatAt(Object:object, index, Float:value, ObjLib_ErrorHandler:e
 /**
  * Gets a value of type "handle" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -852,27 +852,27 @@ stock ObjLib_SetFloatAt(Object:object, index, Float:value, ObjLib_ErrorHandler:e
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock Handle:ObjLib_GetHandleAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Handle:ObjLib_GetHandleAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Handle, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Handle, errorHandler))
     {
         return INVALID_HANDLE;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return INVALID_HANDLE;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return Handle:GetArrayCell(data, index);
 }
 
@@ -881,7 +881,7 @@ stock Handle:ObjLib_GetHandleAt(Object:object, index, ObjLib_ErrorHandler:errorH
 /**
  * Sets a value of type "handle" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -889,15 +889,15 @@ stock Handle:ObjLib_GetHandleAt(Object:object, index, ObjLib_ErrorHandler:errorH
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetHandleAt(Object:object, index, Handle:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetHandleAt(Object:obj, index, Handle:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Handle, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Handle, errorHandler))
     {
         return;
     }
@@ -908,7 +908,7 @@ stock ObjLib_SetHandleAt(Object:object, index, Handle:value, ObjLib_ErrorHandler
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -916,7 +916,7 @@ stock ObjLib_SetHandleAt(Object:object, index, Handle:value, ObjLib_ErrorHandler
 /**
  * Gets a value of type "function" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -925,27 +925,27 @@ stock ObjLib_SetHandleAt(Object:object, index, Handle:value, ObjLib_ErrorHandler
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock Function:ObjLib_GetFunctionAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Function:ObjLib_GetFunctionAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Function, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Function, errorHandler))
     {
         return INVALID_FUNCTION;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return INVALID_FUNCTION;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return Function:GetArrayCell(data, index);
 }
 
@@ -954,7 +954,7 @@ stock Function:ObjLib_GetFunctionAt(Object:object, index, ObjLib_ErrorHandler:er
 /**
  * Sets a value of type "function" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -962,15 +962,15 @@ stock Function:ObjLib_GetFunctionAt(Object:object, index, ObjLib_ErrorHandler:er
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetFunctionAt(Object:object, index, Function:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetFunctionAt(Object:obj, index, Function:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Function, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Function, errorHandler))
     {
         return;
     }
@@ -981,7 +981,7 @@ stock ObjLib_SetFunctionAt(Object:object, index, Function:value, ObjLib_ErrorHan
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -989,7 +989,7 @@ stock ObjLib_SetFunctionAt(Object:object, index, Function:value, ObjLib_ErrorHan
 /**
  * Gets a value of type "array" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param buffer        Destination buffer.
  * @param maxlen        Size of buffer.
@@ -1000,27 +1000,27 @@ stock ObjLib_SetFunctionAt(Object:object, index, Function:value, ObjLib_ErrorHan
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_GetArrayAt(Object:object, index, any:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetArrayAt(Object:obj, index, any:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Array, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Array, errorHandler))
     {
         return 0;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return 0;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return GetArrayArray(data, index, buffer, maxlen);
 }
 
@@ -1029,7 +1029,7 @@ stock ObjLib_GetArrayAt(Object:object, index, any:buffer[], maxlen, ObjLib_Error
 /**
  * Sets a value of type "array" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param values        Array to set.
  * @param size          Size of array.
@@ -1040,7 +1040,7 @@ stock ObjLib_GetArrayAt(Object:object, index, any:buffer[], maxlen, ObjLib_Error
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetArrayAt(Object:object, index, const any:values[], size, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetArrayAt(Object:obj, index, const any:values[], size, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate size.
     if (size <= 0)
@@ -1049,18 +1049,18 @@ stock ObjLib_SetArrayAt(Object:object, index, const any:values[], size, ObjLib_E
     }
     
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Array, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Array, errorHandler))
     {
         return 0;
     }
     
     // Handle constraints, sets value if valid and not overridden.
-    return ObjLib_ApplyConstraints(object, typeDescriptor, index, values, size, errorHandler);
+    return ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, size, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -1068,7 +1068,7 @@ stock ObjLib_SetArrayAt(Object:object, index, const any:values[], size, ObjLib_E
 /**
  * Gets a value of type "string" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param buffer        Destination buffer.
  * @param maxlen        Size of buffer.
@@ -1079,27 +1079,27 @@ stock ObjLib_SetArrayAt(Object:object, index, const any:values[], size, ObjLib_E
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_GetStringAt(Object:object, index, String:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetStringAt(Object:obj, index, String:buffer[], maxlen, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_String, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_String, errorHandler))
     {
         return 0;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return 0;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return GetArrayString(data, index, buffer, maxlen);
 }
 
@@ -1108,7 +1108,7 @@ stock ObjLib_GetStringAt(Object:object, index, String:buffer[], maxlen, ObjLib_E
 /**
  * Sets a value of type "string" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         String to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -1119,12 +1119,12 @@ stock ObjLib_GetStringAt(Object:object, index, String:buffer[], maxlen, ObjLib_E
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetStringAt(Object:object, index, const String:value[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetStringAt(Object:obj, index, const String:value[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     new bool:isLookup = false;
     new bool:isString = true;
@@ -1145,14 +1145,14 @@ stock ObjLib_SetStringAt(Object:object, index, const String:value[], ObjLib_Erro
     {
         // Not using lookup constraints or already in lookup handler. Validate
         // type.
-        if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_String, errorHandler))
+        if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_String, errorHandler))
         {
             return 0;
         }
     }
     
     // Handle constraints, sets value if valid and not overridden.
-    return ObjLib_ApplyConstraints(object, typeDescriptor, index, value, strlen(value), errorHandler, isLookup, isString);
+    return ObjLib_ApplyConstraints(obj, typeDescriptor, index, value, strlen(value), errorHandler, isLookup, isString);
 }
 
 /*____________________________________________________________________________*/
@@ -1160,7 +1160,7 @@ stock ObjLib_SetStringAt(Object:object, index, const String:value[], ObjLib_Erro
 /**
  * Gets a value of type "object" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -1169,27 +1169,27 @@ stock ObjLib_SetStringAt(Object:object, index, const String:value[], ObjLib_Erro
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock Object:ObjLib_GetObjectAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock Object:ObjLib_GetObjectAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Object, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Object, errorHandler))
     {
         return INVALID_OBJECT;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return INVALID_OBJECT;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return Object:GetArrayCell(data, index);
 }
 
@@ -1198,7 +1198,7 @@ stock Object:ObjLib_GetObjectAt(Object:object, index, ObjLib_ErrorHandler:errorH
 /**
  * Sets a value of type "object" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -1206,15 +1206,15 @@ stock Object:ObjLib_GetObjectAt(Object:object, index, ObjLib_ErrorHandler:errorH
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetObjectAt(Object:object, index, Object:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetObjectAt(Object:obj, index, Object:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_Object, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_Object, errorHandler))
     {
         return;
     }
@@ -1225,7 +1225,7 @@ stock ObjLib_SetObjectAt(Object:object, index, Object:value, ObjLib_ErrorHandler
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -1233,7 +1233,7 @@ stock ObjLib_SetObjectAt(Object:object, index, Object:value, ObjLib_ErrorHandler
 /**
  * Gets a value of type "object type" at the specified key index.
  *
- * @param object        Object to get value from.
+ * @param obj           Object to get value from.
  * @param index         Index of key.
  * @param errorHandler  Custom error handler. Overrides any other error handler
  *                      if specified.
@@ -1242,27 +1242,27 @@ stock ObjLib_SetObjectAt(Object:object, index, Object:value, ObjLib_ErrorHandler
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjectType:ObjLib_GetObjectTypeAt(Object:object, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjectType:ObjLib_GetObjectTypeAt(Object:obj, index, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_ObjectType, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_ObjectType, errorHandler))
     {
         return INVALID_OBJECT_TYPE;
     }
     
     // Null check.
-    if (!ObjLib_NullCheck(object, index, errorHandler))
+    if (!ObjLib_NullCheck(obj, index, errorHandler))
     {
         return INVALID_OBJECT_TYPE;
     }
     
     // Get value.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     return ObjectType:GetArrayCell(data, index);
 }
 
@@ -1271,7 +1271,7 @@ stock ObjectType:ObjLib_GetObjectTypeAt(Object:object, index, ObjLib_ErrorHandle
 /**
  * Sets a value of type "object type" at the specified key index.
  *
- * @param object        Object to update.
+ * @param obj           Object to update.
  * @param index         Index of key.
  * @param value         Value to set.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -1279,15 +1279,15 @@ stock ObjectType:ObjLib_GetObjectTypeAt(Object:object, index, ObjLib_ErrorHandle
  *
  * @error               Invalid object, key index or key type mismatch.
  */
-stock ObjLib_SetObjectTypeAt(Object:object, index, ObjectType:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_SetObjectTypeAt(Object:obj, index, ObjectType:value, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Validate type.
-    if (!ObjLib_KeyTypeCheck(typeDescriptor, object, index, ObjDataType_ObjectType, errorHandler))
+    if (!ObjLib_KeyTypeCheck(typeDescriptor, obj, index, ObjDataType_ObjectType, errorHandler))
     {
         return;
     }
@@ -1298,7 +1298,7 @@ stock ObjLib_SetObjectTypeAt(Object:object, index, ObjectType:value, ObjLib_Erro
     values[0] = value;
     
     // Handle constraints, sets value if valid and not overridden.
-    ObjLib_ApplyConstraints(object, typeDescriptor, index, values, 1, errorHandler);
+    ObjLib_ApplyConstraints(obj, typeDescriptor, index, values, 1, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -1312,9 +1312,9 @@ stock ObjLib_SetObjectTypeAt(Object:object, index, ObjectType:value, ObjLib_Erro
  *
  * @return      True if mutable, false otherwise.
  */
-stock bool:ObjLib_IsMutable(Object:object)
+stock bool:ObjLib_IsMutable(Object:obj)
 {
-    return ObjLib_IsTypeMutable(ObjLib_GetTypeDescriptor(object));
+    return ObjLib_IsTypeMutable(ObjLib_GetTypeDescriptor(obj));
 }
 
 /*____________________________________________________________________________*/
@@ -1322,16 +1322,16 @@ stock bool:ObjLib_IsMutable(Object:object)
 /**
  * Gets an object's type descriptor.
  *
- * @param object    Object to get type from.
+ * @param obj       Object to get type from.
  *
  * @return          Object type descriptor reference.
  */
-stock ObjectType:ObjLib_GetTypeDescriptor(Object:object)
+stock ObjectType:ObjLib_GetTypeDescriptor(Object:obj)
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    return ObjectType:GetArrayCell(Handle:object, _:Object_MetaData);
+    return ObjectType:GetArrayCell(Handle:obj, _:Object_MetaData);
 }
 
 /*____________________________________________________________________________*/
@@ -1343,17 +1343,17 @@ stock ObjectType:ObjLib_GetTypeDescriptor(Object:object)
  *          key will be shifted up. If you cache an index and later remove a key
  *          you need to cache the index again.
  *
- * @param object    Object to get index from.
+ * @param obj       Object to get index from.
  * @param keyName   Name of key. Case sensitive.
  *
  * @return          Key index if successful, or -1 if it doesn't exist.
  */
-stock ObjLib_GetKeyIndex(Object:object, const String:keyName[])
+stock ObjLib_GetKeyIndex(Object:obj, const String:keyName[])
 {
     // Validate object.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     return ObjLib_GetKeyIndexFromType(typeDescriptor, keyName);
 }
@@ -1367,7 +1367,7 @@ stock ObjLib_GetKeyIndex(Object:object, const String:keyName[])
  *          key will be shifted up. If you cache an index and later remove a key
  *          you need to cache the index again.
  *
- * @param object    Object to get index from.
+ * @param obj       Object to get index from.
  * @param keyName   Name of key. Case sensitive.
  *
  * @return          Key index if successful, or -1 if it doesn't exist.
@@ -1395,14 +1395,14 @@ stock ObjLib_GetKeyIndexFromType(ObjectType:typeDescriptor, const String:keyName
 /**
  * Returns whether a key is null at the specified key index.
  *
- * @param object    Object to inspect.
+ * @param obj       Object to inspect.
  * @param keyIndex  Key index.
  *
  * @return          True if null, false otherwise.
  */
-stock bool:ObjLib_IsKeyNullAt(Object:object, keyIndex)
+stock bool:ObjLib_IsKeyNullAt(Object:obj, keyIndex)
 {
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
     return bool:GetArrayCell(nullKey, keyIndex);
 }
 
@@ -1411,15 +1411,15 @@ stock bool:ObjLib_IsKeyNullAt(Object:object, keyIndex)
 /**
  * Returns whether a key is null at the specified key index.
  *
- * @param object    Object to inspect.
+ * @param obj       Object to inspect.
  * @param keyName   Key name.
  *
  * @return          True if null, false otherwise.
  */
-stock bool:ObjLib_IsKeyNull(Object:object, const String:keyName[])
+stock bool:ObjLib_IsKeyNull(Object:obj, const String:keyName[])
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName);
-    return ObjLib_IsKeyNullAt(object, keyIndex);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName);
+    return ObjLib_IsKeyNullAt(obj, keyIndex);
 }
 
 /*____________________________________________________________________________*/
@@ -1715,49 +1715,49 @@ stock ObjLib_SetTypeErrorHandler(ObjectType:typeDescriptor, ObjLib_ErrorHandler:
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock Handle:ObjLib_SetTypeDescriptor(Object:object, ObjectType:typeDescriptor)
+stock Handle:ObjLib_SetTypeDescriptor(Object:obj, ObjectType:typeDescriptor)
 {
-    SetArrayCell(Handle:object, _:Object_MetaData, typeDescriptor);
+    SetArrayCell(Handle:obj, _:Object_MetaData, typeDescriptor);
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock Handle:ObjLib_GetObjectData(Object:object)
+stock Handle:ObjLib_GetObjectData(Object:obj)
 {
-    return Handle:GetArrayCell(Handle:object, _:Object_Data);
+    return Handle:GetArrayCell(Handle:obj, _:Object_Data);
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock Handle:ObjLib_SetObjectData(Object:object, Handle:data)
+stock Handle:ObjLib_SetObjectData(Object:obj, Handle:data)
 {
-    SetArrayCell(Handle:object, _:Object_Data, data);
+    SetArrayCell(Handle:obj, _:Object_Data, data);
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock Handle:ObjLib_GetObjectNullKey(Object:object)
+stock Handle:ObjLib_GetObjectNullKey(Object:obj)
 {
-    return Handle:GetArrayCell(Handle:object, _:Object_NullKey);
+    return Handle:GetArrayCell(Handle:obj, _:Object_NullKey);
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock Handle:ObjLib_SetObjectNullKey(Object:object, Handle:data)
+stock Handle:ObjLib_SetObjectNullKey(Object:obj, Handle:data)
 {
-    SetArrayCell(Handle:object, _:Object_NullKey, data);
+    SetArrayCell(Handle:obj, _:Object_NullKey, data);
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock ObjLib_SetKeyNull(Object:object, keyIndex, bool:null)
+stock ObjLib_SetKeyNull(Object:obj, keyIndex, bool:null)
 {
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
     SetArrayCell(nullKey, keyIndex, null);
 }
 
@@ -1767,7 +1767,7 @@ stock ObjLib_SetKeyNull(Object:object, keyIndex, bool:null)
  * Internal use only!
  * Sets a value in an object using the appropriate public functions.
  *
- * @param object                The object.
+ * @param obj                   The object.
  * @param dataType              Data type of value to set.
  * @param index                 Key index.
  * @param values                Values to insert. Only the first value is used
@@ -1775,49 +1775,49 @@ stock ObjLib_SetKeyNull(Object:object, keyIndex, bool:null)
  * @param size                  Number of values.
  * @param errorHandler          Error handler to use for general object errors.
  */
-stock ObjLib_SetValue(Object:object, ObjectDataType:dataType, keyIndex, const any:values[], size, ObjLib_ErrorHandler:errorHandler)
+stock ObjLib_SetValue(Object:obj, ObjectDataType:dataType, keyIndex, const any:values[], size, ObjLib_ErrorHandler:errorHandler)
 {
     switch (dataType)
     {
         case ObjDataType_Any:
         {
-            ObjLib_SetAnyAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetAnyAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Cell:
         {
-            ObjLib_SetCellAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetCellAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Bool:
         {
-            ObjLib_SetBoolAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetBoolAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Float:
         {
-            ObjLib_SetFloatAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetFloatAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Handle:
         {
-            ObjLib_SetHandleAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetHandleAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Function:
         {
-            ObjLib_SetFunctionAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetFunctionAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_Array:
         {
-            ObjLib_SetArrayAt(object, keyIndex, values, size, errorHandler);
+            ObjLib_SetArrayAt(obj, keyIndex, values, size, errorHandler);
         }
         case ObjDataType_String:
         {
-            ObjLib_SetStringAt(object, keyIndex, values, errorHandler);
+            ObjLib_SetStringAt(obj, keyIndex, values, errorHandler);
         }
         case ObjDataType_Object:
         {
-            ObjLib_SetObjectAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetObjectAt(obj, keyIndex, values[0], errorHandler);
         }
         case ObjDataType_ObjectType:
         {
-            ObjLib_SetObjectTypeAt(object, keyIndex, values[0], errorHandler);
+            ObjLib_SetObjectTypeAt(obj, keyIndex, values[0], errorHandler);
         }
         default:
         {

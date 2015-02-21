@@ -409,7 +409,7 @@ stock ObjLib_ValidateObjectType(ObjectType:typeDescriptor)
  * This function will throw an validation error on key type mismatch.
  *
  * @param typeDescriptor    Object type descriptor.
- * @param object            Related object.
+ * @param obj               Related object.
  * @param keyIndex          Index of key to validate against.
  * @param keyType           Type of key to validate.
  * @param errorHandler      Custom error handler. Overrides error handler in
@@ -417,11 +417,11 @@ stock ObjLib_ValidateObjectType(ObjectType:typeDescriptor)
  *
  * @return                  True if passed, false otherwise.
  */
-stock bool:ObjLib_KeyTypeCheck(ObjectType:typeDescriptor, Object:object, keyIndex, ObjectDataType:keyType, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock bool:ObjLib_KeyTypeCheck(ObjectType:typeDescriptor, Object:obj, keyIndex, ObjectDataType:keyType, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate key index.
     if (keyIndex < 0
-        && ObjLib_HandleError(typeDescriptor, object, ObjLibError_InvalidKey, errorHandler, _, _, "Invalid key index (%d).", keyIndex))
+        && ObjLib_HandleError(typeDescriptor, obj, ObjLibError_InvalidKey, errorHandler, _, _, "Invalid key index (%d).", keyIndex))
     {
         return false;
     }
@@ -432,7 +432,7 @@ stock bool:ObjLib_KeyTypeCheck(ObjectType:typeDescriptor, Object:object, keyInde
     if (keyType != destType)
     {
         // Key mismatch. Throw error.
-        ObjLib_TypeMismatchError(typeDescriptor, object, keyType, destType, errorHandler);
+        ObjLib_TypeMismatchError(typeDescriptor, obj, keyType, destType, errorHandler);
         return false;
     }
     

@@ -31,7 +31,7 @@
  * a regular error.
  *
  * @param typeDescriptor    Related type descriptor.
- * @param object            Related object, if available.
+ * @param obj               Related object, if available.
  * @param errorType         Type of error.
  * @param customHandler     Custom error handler. Overrides handler in type
  *                          descriptor if specified.
@@ -45,7 +45,7 @@
  *              doesn't return at all.
  */
 stock bool:ObjLib_HandleError(ObjectType:typeDescriptor,
-                              Object:object = INVALID_OBJECT,
+                              Object:obj = INVALID_OBJECT,
                               ObjLibError:errorType,
                               ObjLib_ErrorHandler:customHandler = INVALID_FUNCTION,
                               &Action:result = Plugin_Handled,
@@ -81,12 +81,12 @@ stock bool:ObjLib_HandleError(ObjectType:typeDescriptor,
     else
     {
         // Forward to callback.
-        // functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:object, Object:data);
+        // functag public Action:ObjLib_ErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:obj, Object:data);
         Call_StartFunction(GetMyHandle(), callback);
         Call_PushCell(typeDescriptor);
         Call_PushCell(errorType);
         Call_PushString(message);
-        Call_PushCell(object);
+        Call_PushCell(obj);
         Call_PushCell(data);
         Call_Finish(result);
         return true;
@@ -115,7 +115,7 @@ stock ObjLib_ErrorHandler:ObjLib_GetErrorHandler(ObjectType:typeDescriptor, ObjL
  * @return      True if error was handled. If not handled this function does not
  *              return.
  */
-stock bool:ObjLib_TypeMismatchError(ObjectType:typeDescriptor, Object:object, ObjectDataType:actual, ObjectDataType:expected, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock bool:ObjLib_TypeMismatchError(ObjectType:typeDescriptor, Object:obj, ObjectDataType:actual, ObjectDataType:expected, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     new String:actualName[16];
     new String:expectedName[16];
@@ -123,5 +123,5 @@ stock bool:ObjLib_TypeMismatchError(ObjectType:typeDescriptor, Object:object, Ob
     ObjLib_DataTypeToString(actual, actualName, sizeof(actualName));
     ObjLib_DataTypeToString(expected, expectedName, sizeof(expectedName));
     
-    return ObjLib_HandleError(typeDescriptor, object, ObjLibError_TypeMismatch, errorHandler, _, _, "Data type mismatch. Expected \"%s\", but \"%s\" was used.", expectedName, actualName);
+    return ObjLib_HandleError(typeDescriptor, obj, ObjLibError_TypeMismatch, errorHandler, _, _, "Data type mismatch. Expected \"%s\", but \"%s\" was used.", expectedName, actualName);
 }

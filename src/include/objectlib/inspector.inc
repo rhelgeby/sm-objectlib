@@ -162,14 +162,14 @@ public Action:ObjLibCommand_Inspect(client, argc)
     new String:argBuffer[16];
     GetCmdArg(1, argBuffer, sizeof(argBuffer));
     
-    new Object:object;
+    new Object:obj;
     
     // Parse hex string.
-    StringToIntEx(argBuffer, _:object, 16);
+    StringToIntEx(argBuffer, _:obj, 16);
     
-    ReplyToCommand(client, "Inspecting object 0x%X.", object);
+    ReplyToCommand(client, "Inspecting object 0x%X.", obj);
     
-    ObjLib_DumpObjectKeys(client, object);
+    ObjLib_DumpObjectKeys(client, obj);
     
     return Plugin_Handled;
 }
@@ -188,14 +188,14 @@ public Action:ObjLibCommand_InspectEx(client, argc)
     new String:argBuffer[16];
     GetCmdArg(1, argBuffer, sizeof(argBuffer));
     
-    new Object:object;
+    new Object:obj;
     
     // Parse hex string.
-    StringToIntEx(argBuffer, _:object, 16);
+    StringToIntEx(argBuffer, _:obj, 16);
     
-    ReplyToCommand(client, "Inspecting raw data in object 0x%X.", object);
+    ReplyToCommand(client, "Inspecting raw data in object 0x%X.", obj);
     
-    ObjLib_DumpRawObject(client, object);
+    ObjLib_DumpRawObject(client, obj);
     
     return Plugin_Handled;
 }
@@ -355,9 +355,9 @@ public Action:ObjLibCommand_InspectArrayHex(client, argc)
  * 4 key(s) total.
  *
  * @param client        Client or server index.
- * @param object        Object to inspect.
+ * @param obj           Object to inspect.
  */
-stock ObjLib_DumpObjectKeys(client, Object:object)
+stock ObjLib_DumpObjectKeys(client, Object:obj)
 {
     static String:HEADER_FORMAT[] = "%23s %11s %s\n-------------------------------------------------------------------------------";
     static String:ROW_FORMAT[] = "%23s %11s %s";
@@ -367,11 +367,11 @@ stock ObjLib_DumpObjectKeys(client, Object:object)
     new String:valueString[OBJLIB_MAX_STRING_LEN];
     
     // Get type.
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Get keys.
     new Handle:keys = ObjLib_GetTypeKeys(typeDescriptor);
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
     
     // Get data types.
     new Handle:dataTypes = ObjLib_GetTypeDataTypes(typeDescriptor);
@@ -397,7 +397,7 @@ stock ObjLib_DumpObjectKeys(client, Object:object)
         }
         else
         {
-            ObjLib_ValueToString(object, key, valueString, sizeof(valueString));
+            ObjLib_ValueToString(obj, key, valueString, sizeof(valueString));
         }
         
         // Print row.
@@ -413,9 +413,9 @@ stock ObjLib_DumpObjectKeys(client, Object:object)
  * Prints object raw data to the specified client.
  *
  * @param client        Client or server index.
- * @param object        Object to inspect.
+ * @param obj           Object to inspect.
  */
-stock ObjLib_DumpRawObject(client, Object:object)
+stock ObjLib_DumpRawObject(client, Object:obj)
 {
     static String:HEADER_FORMAT[] = "%23s %15s %s\n-------------------------------------------------------------------------------";
     static String:ROW_FORMAT[] = "%23s %15s %s";
@@ -423,9 +423,9 @@ stock ObjLib_DumpRawObject(client, Object:object)
     new String:valueString[16];
     
     // Get raw data.
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
-    new Handle:data = ObjLib_GetObjectData(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
+    new Handle:data = ObjLib_GetObjectData(obj);
     
     // Print table header.
     ReplyToCommand(client, HEADER_FORMAT, "Field:", "Data type:", "Value:");
@@ -449,7 +449,7 @@ stock ObjLib_DumpRawObject(client, Object:object)
  * Prints type descriptor raw data to the specified client.
  *
  * @param client        Client or server index.
- * @param object        Object to inspect.
+ * @param obj           Object to inspect.
  */
 stock ObjLib_DumpRawType(client, ObjectType:typeDescriptor)
 {
@@ -514,27 +514,27 @@ stock ObjLib_DumpRawType(client, ObjectType:typeDescriptor)
 /**
  * Converts the value at the specified key index to a string.
  *
- * @param object    Object to inspect.
+ * @param obj       Object to inspect.
  * @param keyIndex  Index of key to convert.
  * @param buffer    Destination string buffer.
  * @param maxlen    Size of buffer.
  *
  * @return          Number of cells written.
  */
-stock ObjLib_ValueToString(Object:object, keyIndex, String:buffer[], maxlen)
+stock ObjLib_ValueToString(Object:obj, keyIndex, String:buffer[], maxlen)
 {
     decl String:valueString[OBJLIB_MAX_STRING_LEN];
     valueString[0] = 0;
     
     // Get type.
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     // Get data type.
     new Handle:dataTypes = ObjLib_GetTypeDataTypes(typeDescriptor);
     new ObjectDataType:dataType = ObjectDataType:GetArrayCell(dataTypes, keyIndex);
     
     // Get data values.
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     
     switch (dataType)
     {

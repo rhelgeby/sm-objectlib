@@ -312,8 +312,8 @@ stock Object:ObjLib_ParseSection(Handle:kv, Object:parseContext)
     
     // Get current section object from the object stack (keep it on the stack).
     // It may be invalid if the current section is being skipped due to errors.
-    new Object:object = INVALID_OBJECT;
-    Array_PeekCell(ObjLib_GetHandle(parseContext, "objectStack"), object);
+    new Object:obj = INVALID_OBJECT;
+    Array_PeekCell(ObjLib_GetHandle(parseContext, "objectStack"), obj);
     
     // Loop through keys and sections in the current kv section.
     do
@@ -419,22 +419,22 @@ static stock ObjLib_OnSectionStart(Handle:kv, const String:sectionName[], Object
     }
     
     // Delegate work to appropriate handlers according to object type.
-    new Object:object = INVALID_OBJECT;
+    new Object:obj = INVALID_OBJECT;
     if (ObjLib_IsCollectionType(typeDescriptor))
     {
         // Object is a collection.
         PrintToServer("Creating collection object.");
-        object = ObjLib_OnCollectionStart(constraints, parentType, sectionName, parseContext);
+        obj = ObjLib_OnCollectionStart(constraints, parentType, sectionName, parseContext);
     }
     else
     {
         // Object is a general object (typed or untyped).
-        object = ObjLib_OnObjectStart(parentType, typeDescriptor, sectionName, parseContext);
+        obj = ObjLib_OnObjectStart(parentType, typeDescriptor, sectionName, parseContext);
     }
     
     // Push to cursor stacks so they become the current type and object.
     PushArrayCell(typeStack, typeDescriptor);
-    PushArrayCell(objectStack, object);
+    PushArrayCell(objectStack, obj);
     PushArrayString(nameStack, sectionName);
 }
 
@@ -485,11 +485,11 @@ static stock Object:ObjLib_OnSectionEnd(Handle:kv, const String:sectionName[], O
     Array_Pop(nameStack);
     
     // Get and pop section object from the object stack.
-    new Object:object = INVALID_OBJECT;
-    Array_PopCell(objectStack, object);
+    new Object:obj = INVALID_OBJECT;
+    Array_PopCell(objectStack, obj);
     
     // Validate object.
-    if (object == INVALID_OBJECT)
+    if (obj == INVALID_OBJECT)
     {
         ThrowError("[BUG] No object on the stack. This is a bug in objectlib.");
     }
@@ -513,7 +513,7 @@ static stock Object:ObjLib_OnSectionEnd(Handle:kv, const String:sectionName[], O
     {
         // There is no parent object, the object stack is empty. Return the
         // object as it is.
-        return object;
+        return obj;
     }
     
     // Get parent type.
@@ -523,12 +523,12 @@ static stock Object:ObjLib_OnSectionEnd(Handle:kv, const String:sectionName[], O
     if (ObjLib_IsCollectionType(parentType))
     {
         // Parent is a collection.
-        ObjLib_OnCollectionObjectElement(Collection:parent, object, errorHandler);
+        ObjLib_OnCollectionObjectElement(Collection:parent, obj, errorHandler);
     }
     else
     {
         // Parent is a general object.
-        ObjLib_OnObjectEnd(object, parent, sectionName, errorHandler);
+        ObjLib_OnObjectEnd(obj, parent, sectionName, errorHandler);
     }
     
     // Object was stored in parent object, nothing to return.
@@ -603,13 +603,13 @@ static stock Object:ObjLib_OnObjectStart(ObjectType:parentType, ObjectType:secti
  * Current object is on top of the object stack. This handler will store it in
  * the parent object, or return it if there's no parent.
  *
- * @param object            This object.
+ * @param obj               This object.
  * @param parent            Parent object.
  * @param sectionName       Name of the ending section.
  * @param parseContext      Parse context object. (Type: ObjLib_KvParamsType)
  * @param errorHandler      Error handler to use on errors.
  */
-static stock ObjLib_OnObjectEnd(Object:object, Object:parent, const String:sectionName[], ObjLib_ErrorHandler:errorHandler)
+static stock ObjLib_OnObjectEnd(Object:obj, Object:parent, const String:sectionName[], ObjLib_ErrorHandler:errorHandler)
 {
     // Get index of sub section key in parent object. This key may not exist if
     // the parent object type is not predefined in rootType.
@@ -639,7 +639,7 @@ static stock ObjLib_OnObjectEnd(Object:object, Object:parent, const String:secti
     }
     
     // Add object to parent (implies further validation, if any).
-    ObjLib_SetObject(parent, sectionName, object, errorHandler);
+    ObjLib_SetObject(parent, sectionName, obj, errorHandler);
 }
 
 /*____________________________________________________________________________*/
@@ -716,9 +716,9 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
     new Handle:typeStack = ObjLib_GetHandle(parseContext, "typeStack");
     
     // Get current object.
-    new Object:object = INVALID_OBJECT;
-    Array_PeekCell(objectStack, object);
-    if (object == INVALID_OBJECT)
+    new Object:obj = INVALID_OBJECT;
+    Array_PeekCell(objectStack, obj);
+    if (obj == INVALID_OBJECT)
     {
         // Bug. An object should already be prepared and pushed onto the stack
         // when the section started.
@@ -726,7 +726,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
     }
     
     // Get object type.
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     PrintToServer("typeDescriptor: %x", typeDescriptor);
     
     // Get and store value. Objectlib will handle type mismatch or constraint
@@ -734,10 +734,10 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
     if (ObjLib_IsCollectionType(typeDescriptor))
     {
         // Object is a collection. Get data type of collection.
-        new ObjectDataType:dataType = ObjLib_CollectionGetDataType(Collection:object);
+        new ObjectDataType:dataType = ObjLib_CollectionGetDataType(Collection:obj);
         
         // Add value to collection.
-        ObjLib_StoreCollectionValue(kv, Collection:object, dataType, parseContext);
+        ObjLib_StoreCollectionValue(kv, Collection:obj, dataType, parseContext);
     }
     else
     {
@@ -760,7 +760,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
             
             // Object has no predefined type descriptor. Add string key with no
             // constraints.
-            ObjLib_AddObjectKey(object, keyName, ObjDataType_String);
+            ObjLib_AddObjectKey(obj, keyName, ObjDataType_String);
             dataType = ObjDataType_String;
         }
         else
@@ -769,7 +769,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
             
             // Get data type of key. It will be string if key is using lookup
             // constraints.
-            dataType = ObjLib_GetKeyTypeOrFail(object, typeDescriptor, keyName, parseContext);
+            dataType = ObjLib_GetKeyTypeOrFail(obj, typeDescriptor, keyName, parseContext);
             
             // Check if failed.
             if (dataType == ObjDataType_Invalid)
@@ -780,7 +780,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
         }
         
         // Store value in object.
-        ObjLib_StoreObjectValue(kv, object, keyName, dataType, parseContext);
+        ObjLib_StoreObjectValue(kv, obj, keyName, dataType, parseContext);
     }
 }
 
@@ -791,7 +791,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
  * Reads a value from a key in the keyvalue tree and stores it in the object.
  *
  * @param kv            Handle to keyvalue tree.
- * @param object        Object to store value in.
+ * @param obj           Object to store value in.
  * @param keyName       Key to read.
  * @param dataType      Key type.
  * @param errorHandler  Custom error handler. Overrides any other error handler
@@ -799,7 +799,7 @@ static stock ObjLib_OnKeyValue(Handle:kv, const String:keyName[], KvDataTypes:kv
  * @param parseContect  Object with parser settings.
  *                      (Type: ObjLib_KvParamsType)
  */
-static stock ObjLib_StoreObjectValue(Handle:kv, Object:object, const String:keyName[], ObjectDataType:dataType, Object:parseContext)
+static stock ObjLib_StoreObjectValue(Handle:kv, Object:obj, const String:keyName[], ObjectDataType:dataType, Object:parseContext)
 {
     // Note: Using NULL_STRING as key name in KeyValue tree so that it will read
     //       the value at the current cursor position (which is prepared by the
@@ -815,12 +815,12 @@ static stock ObjLib_StoreObjectValue(Handle:kv, Object:object, const String:keyN
         case ObjDataType_Any:
         {
             new value = KvGetNum(kv, NULL_STRING);
-            ObjLib_SetAny(object, keyName, value, errorHandler);
+            ObjLib_SetAny(obj, keyName, value, errorHandler);
         }
         case ObjDataType_Cell:
         {
             new value = KvGetNum(kv, NULL_STRING);
-            ObjLib_SetCell(object, keyName, value, errorHandler);
+            ObjLib_SetCell(obj, keyName, value, errorHandler);
         }
         case ObjDataType_Bool:
         {
@@ -828,12 +828,12 @@ static stock ObjLib_StoreObjectValue(Handle:kv, Object:object, const String:keyN
             //       user may use a boolean lookup constraint for converting
             //       boolean words and call SetString instead.
             new bool:value = bool:KvGetNum(kv, NULL_STRING);
-            ObjLib_SetBool(object, keyName, value, errorHandler);
+            ObjLib_SetBool(obj, keyName, value, errorHandler);
         }
         case ObjDataType_Float:
         {
             new Float:value = KvGetFloat(kv, NULL_STRING);
-            ObjLib_SetFloat(object, keyName, value, errorHandler);
+            ObjLib_SetFloat(obj, keyName, value, errorHandler);
         }
         case ObjDataType_Handle:
         {
@@ -858,7 +858,7 @@ static stock ObjLib_StoreObjectValue(Handle:kv, Object:object, const String:keyN
             decl String:value[OBJLIB_KV_MAX_STRING_LEN];
             value[0] = 0;
             KvGetString(kv, NULL_STRING, value, sizeof(value));
-            ObjLib_SetString(object, keyName, value, errorHandler);
+            ObjLib_SetString(obj, keyName, value, errorHandler);
             PrintToServer("Reading value of %s: \"%s\"", keyName, value);
         }
         case ObjDataType_Object:
@@ -1330,7 +1330,7 @@ static stock ObjectType:ObjLib_KvGetSubTypeOrFail(const String:subSection[], Obj
  *
  * If a key is using lookup constraints, the string data type will be returned.
  *
- * @param object            Object with the specified key.
+ * @param obj               Object with the specified key.
  * @param typeDescriptor    Type descriptor for object.
  * @param keyName           Name of key to get data type of.
  * @param parseContext      Object with parser settings.
@@ -1338,7 +1338,7 @@ static stock ObjectType:ObjLib_KvGetSubTypeOrFail(const String:subSection[], Obj
  *
  * @return                  Key data type, or ObjDataType_Invalid on error.
  */
-static stock ObjectDataType:ObjLib_GetKeyTypeOrFail(Object:object, ObjectType:typeDescriptor, const String:keyName[], Object:parseContext)
+static stock ObjectDataType:ObjLib_GetKeyTypeOrFail(Object:obj, ObjectType:typeDescriptor, const String:keyName[], Object:parseContext)
 {
     new ObjectDataType:keyDataType = ObjDataType_Invalid;
     // Get key index.
@@ -1349,7 +1349,7 @@ static stock ObjectDataType:ObjLib_GetKeyTypeOrFail(Object:object, ObjectType:ty
         new ObjLib_ErrorHandler:errorHandler = ObjLib_KvGetErrorHandler(parseContext);
         
         // Unexpected key. Throw validation error.
-        new bool:errorHandled = ObjLib_KvUnexpectedKeyError(object, typeDescriptor, errorHandler, parseContext, keyName);
+        new bool:errorHandled = ObjLib_KvUnexpectedKeyError(obj, typeDescriptor, errorHandler, parseContext, keyName);
         if (errorHandled)
         {
             // Return to parse loop. The parse state will tell if parser

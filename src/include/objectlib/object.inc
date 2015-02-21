@@ -58,7 +58,7 @@ stock Object:ObjLib_CreateObject(ObjectType:typeTemplate, bool:mutableObject = f
     // Validate.
     ObjLib_ValidateObjectType(typeTemplate);
     
-    new Object:object = Object:CreateArray(_, OBJECT_DATA_LEN);
+    new Object:obj = Object:CreateArray(_, OBJECT_DATA_LEN);
     new blockSize = ObjLib_GetTypeBlockSize(typeTemplate);
     new keyCount = ObjLib_GetNumKeys(typeTemplate);
     
@@ -81,7 +81,7 @@ stock Object:ObjLib_CreateObject(ObjectType:typeTemplate, bool:mutableObject = f
         type = ObjLib_CloneType(typeTemplate, false);
         
         // Attach type to cloned object.
-        ObjLib_SetTypeParentObject(type, object);
+        ObjLib_SetTypeParentObject(type, obj);
     }
     else
     {
@@ -92,12 +92,12 @@ stock Object:ObjLib_CreateObject(ObjectType:typeTemplate, bool:mutableObject = f
         ObjLib_SetTypeLocked(type, true);
     }
     
-    ObjLib_SetObjectData(object,        data);
-    ObjLib_SetObjectNullKey(object,     nullKey);
-    ObjLib_SetTypeDescriptor(object,    type);
+    ObjLib_SetObjectData(obj, data);
+    ObjLib_SetObjectNullKey(obj, nullKey);
+    ObjLib_SetTypeDescriptor(obj, type);
     
     ObjectCount++;
-    return object;
+    return obj;
 }
 
 /*____________________________________________________________________________*/
@@ -148,7 +148,7 @@ stock Object:ObjLib_CreateObjectEx(ObjectType:primaryType = INVALID_OBJECT_TYPE,
 /**
  * Deletes an object and its data.
  *
- * @param object            Object to delete.
+ * @param obj               Object to delete.
  * @param resetReference    (Optional) Reset object to INVALID_OBJECT when
  *                          deleted. Default is true.
  * @param closeHandles      (Optional) Close handles stored in keys of handle
@@ -156,18 +156,18 @@ stock Object:ObjLib_CreateObjectEx(ObjectType:primaryType = INVALID_OBJECT_TYPE,
  *
  * @error                   Invalid object.
  */
-stock ObjLib_DeleteObject(&Object:object, bool:resetReference = true, bool:closeHandles = false)
+stock ObjLib_DeleteObject(&Object:obj, bool:resetReference = true, bool:closeHandles = false)
 {
     // TODO: Add support for recursive deletion (nested objects/types).
     //       Use a traversal stack. Don't delete objects that's already in the
     //       stack. This should prevent objects from being deleted twice.
     
     // Validate.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
-    new Handle:data = ObjLib_GetObjectData(object);
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
+    new Handle:data = ObjLib_GetObjectData(obj);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
     
     // Close handles in keys if enabled.
     if (closeHandles)
@@ -195,9 +195,9 @@ stock ObjLib_DeleteObject(&Object:object, bool:resetReference = true, bool:close
     if (parent != INVALID_OBJECT)
     {
         // Check if the type descriptor actually belong to this object. (Potential bug).
-        if (parent != object)
+        if (parent != obj)
         {
-            ThrowError("[BUG] This mutable object (%x) has a type descriptor (%x) that isn't owned by this object. This is a bug!", object, typeDescriptor);
+            ThrowError("[BUG] This mutable object (%x) has a type descriptor (%x) that isn't owned by this object. This is a bug!", obj, typeDescriptor);
         }
         
         // Unattatch type descriptor from object so it can be deleted.
@@ -212,12 +212,12 @@ stock ObjLib_DeleteObject(&Object:object, bool:resetReference = true, bool:close
     CloseHandle(nullKey);
     
     // Delete object.
-    CloseHandle(Handle:object);
+    CloseHandle(Handle:obj);
     
     // Reset reference if enabled.
     if (resetReference)
     {
-        object = INVALID_OBJECT;
+        obj = INVALID_OBJECT;
     }
     
     ObjectCount--;
@@ -254,15 +254,15 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
     ObjLib_ValidateObject(objectTemplate);
     
     // Create new object array.
-    new Object:object = Object:CreateArray(_, OBJECT_DATA_LEN);
+    new Object:obj = Object:CreateArray(_, OBJECT_DATA_LEN);
     
     // Clone data array.
     new Handle:data = CloneArray(ObjLib_GetObjectData(objectTemplate));
-    ObjLib_SetObjectData(object, data);
+    ObjLib_SetObjectData(obj, data);
     
     // Clone null key array.
-    new Handle:nullKey = CloneArray(ObjLib_GetObjectNullKey(Object:object));
-    ObjLib_SetObjectNullKey(object, nullKey);
+    new Handle:nullKey = CloneArray(ObjLib_GetObjectNullKey(Object:obj));
+    ObjLib_SetObjectNullKey(obj, nullKey);
     
     // Clone type.
     new ObjectType:typeTemplate = ObjLib_GetTypeDescriptor(objectTemplate);
@@ -288,7 +288,7 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
     {
         // Template and destination object is immutable. Use the same type
         // descriptor.
-        ObjLib_SetTypeDescriptor(object, typeTemplate);
+        ObjLib_SetTypeDescriptor(obj, typeTemplate);
     }
     else
     {
@@ -298,13 +298,13 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
         if (mutableObject)
         {
             // Destination is mutable. Attatch cloned type.
-            ObjLib_SetTypeParentObject(type, object);
-            ObjLib_SetTypeDescriptor(object, type);
+            ObjLib_SetTypeParentObject(type, obj);
+            ObjLib_SetTypeDescriptor(obj, type);
         }
         else
         {
             // Destination is immutable. Link cloned type.
-            ObjLib_SetTypeDescriptor(object, type);
+            ObjLib_SetTypeDescriptor(obj, type);
 
             // Lock type.
             ObjLib_SetTypeLocked(type, true);
@@ -315,7 +315,7 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
     if (cloneHandles)
     {
         new len = GetArraySize(data);
-        new Handle:dataTypes = ObjLib_GetTypeDataTypes(ObjLib_GetTypeDescriptor(object));
+        new Handle:dataTypes = ObjLib_GetTypeDataTypes(ObjLib_GetTypeDescriptor(obj));
         
         // Loop through data values.
         for (new i = 0; i < len; i++)
@@ -334,7 +334,7 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
     }
     
     ObjectCount++;
-    return object;
+    return obj;
 }
 
 /*____________________________________________________________________________*/
@@ -342,13 +342,13 @@ stock Object:ObjLib_CloneObject(Object:objectTemplate, bool:mutableObject = true
 /**
  * Returns whether the object reference is valid.
  *
- * @param object    Object reference to validate.
+ * @param obj       Object reference to validate.
  *
  * @return          True if valid, false otherwise.
  */
-stock bool:ObjLib_IsValidObject(Object:object)
+stock bool:ObjLib_IsValidObject(Object:obj)
 {
-    return object != INVALID_OBJECT;
+    return obj != INVALID_OBJECT;
 }
 
 /*____________________________________________________________________________*/
@@ -359,14 +359,14 @@ stock bool:ObjLib_IsValidObject(Object:object)
  * Note: This is simple type checking. It compares the object's type descriptor
  *       reference against the specified reference.
  *
- * @param object            Object reference to check.
+ * @param obj               Object reference to check.
  * @param typeDescriptor    Type to match against.
  *
  * @return                  True if types match, false otherwise.
  */
-stock bool:ObjLib_TypeOf(Object:object, ObjectType:typeDescriptor)
+stock bool:ObjLib_TypeOf(Object:obj, ObjectType:typeDescriptor)
 {
-    return typeDescriptor == ObjLib_GetTypeDescriptor(object);
+    return typeDescriptor == ObjLib_GetTypeDescriptor(obj);
 }
 
 /*____________________________________________________________________________*/
@@ -374,7 +374,7 @@ stock bool:ObjLib_TypeOf(Object:object, ObjectType:typeDescriptor)
 /**
  * Adds a new key to an object, if not locked.
  *
- * @param object        Object to remove key from.
+ * @param obj           Object to remove key from.
  * @param keyName       Name of key to remove. Case sensitive.
  * @param dataType      Data type of key.
  * @param constraints   Key constraints. Constraint type must match data type.
@@ -383,12 +383,12 @@ stock bool:ObjLib_TypeOf(Object:object, ObjectType:typeDescriptor)
  * @error               Invalid object, immutable object, invalid constraint
  *                      object, or key name already exist.
  */
-stock bool:ObjLib_AddObjectKey(Object:object, const String:keyName[], ObjectDataType:dataType = ObjDataType_Any, Object:constraints = INVALID_OBJECT)
+stock bool:ObjLib_AddObjectKey(Object:obj, const String:keyName[], ObjectDataType:dataType = ObjDataType_Any, Object:constraints = INVALID_OBJECT)
 {
     // Validate.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     ObjLib_AddKey(typeDescriptor, keyName, dataType, constraints);
 }
 
@@ -399,7 +399,7 @@ stock bool:ObjLib_AddObjectKey(Object:object, const String:keyName[], ObjectData
  *
  * Warning: Data associated with this key will also be deleted.
  *
- * @param object            Object to remove key from.
+ * @param obj               Object to remove key from.
  * @param keyName           Name of key to remove. Case sensitive.
  * @param deleteConstraint  (Optional) Delete constratint object, if any.
  *                          Default is true.
@@ -407,12 +407,12 @@ stock bool:ObjLib_AddObjectKey(Object:object, const String:keyName[], ObjectData
  * @error                   Invalid object, immutable object, or key name
  *                          doesn't exist.
  */
-stock ObjLib_RemoveObjectKey(Object:object, const String:keyName[], bool:deleteConstraint = true)
+stock ObjLib_RemoveObjectKey(Object:obj, const String:keyName[], bool:deleteConstraint = true)
 {
     // Validate.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     ObjLib_RemoveKey(typeDescriptor, keyName, deleteConstraint);
 }
 
@@ -421,15 +421,15 @@ stock ObjLib_RemoveObjectKey(Object:object, const String:keyName[], bool:deleteC
 /**
  * Resets the value in the specified key (marked as null).
  *
- * @param object    Object to update.
+ * @param obj       Object to update.
  * @param keyName   Key name.
  *
  * @error           Invalid object.
  */
-stock ObjLib_ClearKey(Object:object, const String:keyName[])
+stock ObjLib_ClearKey(Object:obj, const String:keyName[])
 {
-    new keyIndex = ObjLib_GetKeyIndexOrFail(object, keyName);
-    ObjLib_ClearKeyAt(object, keyIndex);
+    new keyIndex = ObjLib_GetKeyIndexOrFail(obj, keyName);
+    ObjLib_ClearKeyAt(obj, keyIndex);
 }
 
 /*____________________________________________________________________________*/
@@ -437,17 +437,17 @@ stock ObjLib_ClearKey(Object:object, const String:keyName[])
 /**
  * Resets the value in the specified key (marked as null).
  *
- * @param object    Object to update.
+ * @param obj       Object to update.
  * @param keyIndex  Key index.
  *
  * @error           Invalid object.
  */
-stock ObjLib_ClearKeyAt(Object:object, keyIndex)
+stock ObjLib_ClearKeyAt(Object:obj, keyIndex)
 {
     // Validate.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    ObjLib_SetKeyNull(object, keyIndex, true);
+    ObjLib_SetKeyNull(obj, keyIndex, true);
 }
 
 
@@ -456,31 +456,31 @@ stock ObjLib_ClearKeyAt(Object:object, keyIndex)
  ******************************************************************************/
 
 /** Internal use only! */
-stock ObjLib_ValidateObject(Object:object)
+stock ObjLib_ValidateObject(Object:obj)
 {
-    if (!ObjLib_IsValidObject(object))
+    if (!ObjLib_IsValidObject(obj))
     {
-        ThrowError("Invalid object (%x).", object);
+        ThrowError("Invalid object (%x).", obj);
     }
 }
 
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock bool:ObjLib_NullCheck(Object:object, keyIndex, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock bool:ObjLib_NullCheck(Object:obj, keyIndex, ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
-    if (ObjLib_IsKeyNullAt(object, keyIndex))
+    if (ObjLib_IsKeyNullAt(obj, keyIndex))
     {
         // Key is null. Throw error.
         
-        new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+        new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
         
         // Get Key name.
         new String:keyName[OBJECT_KEY_NAME_LEN];
         new Handle:keys = ObjLib_GetTypeKeys(typeDescriptor);
         GetArrayString(keys, keyIndex, keyName, sizeof(keyName));
         
-        ObjLib_HandleError(typeDescriptor, object, ObjLibError_NullDataKey, errorHandler, _, _, "Key at index %d is null: %s", keyIndex, keyName);
+        ObjLib_HandleError(typeDescriptor, obj, ObjLibError_NullDataKey, errorHandler, _, _, "Key at index %d is null: %s", keyIndex, keyName);
         return false;
     }
     
@@ -490,16 +490,16 @@ stock bool:ObjLib_NullCheck(Object:object, keyIndex, ObjLib_ErrorHandler:errorHa
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock ObjLib_GetKeyIndexOrFail(Object:object, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
+stock ObjLib_GetKeyIndexOrFail(Object:obj, const String:keyName[], ObjLib_ErrorHandler:errorHandler = INVALID_FUNCTION)
 {
     // Validate.
-    ObjLib_ValidateObject(object);
+    ObjLib_ValidateObject(obj);
     
-    new keyIndex = ObjLib_GetKeyIndex(object, keyName);
-    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(object);
+    new keyIndex = ObjLib_GetKeyIndex(obj, keyName);
+    new ObjectType:typeDescriptor = ObjLib_GetTypeDescriptor(obj);
     
     if (keyIndex < 0
-        && ObjLib_HandleError(typeDescriptor, object, ObjLibError_InvalidKey, errorHandler, _, _, "Invalid key name (%s).", keyName))
+        && ObjLib_HandleError(typeDescriptor, obj, ObjLibError_InvalidKey, errorHandler, _, _, "Invalid key name (%s).", keyName))
     {
         return -1;
     }
@@ -516,13 +516,13 @@ stock ObjLib_GetKeyIndexOrFail(Object:object, const String:keyName[], ObjLib_Err
  * Note: Don't make new value entries without updating the type descriptor.
  *       These must match.
  *
- * @param object    Object where new value entry is added.
+ * @param obj       Object where new value entry is added.
  * @param dataType  Data type of initialized value.
  */
-stock ObjLib_AddNewValue(Object:object, ObjectDataType:dataType)
+stock ObjLib_AddNewValue(Object:obj, ObjectDataType:dataType)
 {
-    new Handle:data = ObjLib_GetObjectData(object);
-    new Handle:nullKey = ObjLib_GetObjectNullKey(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
+    new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
     
     switch (dataType)
     {
@@ -585,11 +585,11 @@ stock ObjLib_AddNewValue(Object:object, ObjectDataType:dataType)
  *
  * Note: Don't remove value entries without updating the type descriptor.
  *
- * @param object        Object to remove value from.
+ * @param obj           Object to remove value from.
  * @param entryIndex    Data index of value entry.
  */
-stock ObjLib_RemoveEntry(Object:object, entryIndex)
+stock ObjLib_RemoveEntry(Object:obj, entryIndex)
 {
-    new Handle:data = ObjLib_GetObjectData(object);
+    new Handle:data = ObjLib_GetObjectData(obj);
     RemoveFromArray(data, entryIndex);
 }

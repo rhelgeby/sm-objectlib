@@ -28,7 +28,7 @@
 /**
  * Triggers an unexpected key error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -38,7 +38,7 @@
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvUnexpectedKeyError(Object:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[])
+stock bool:ObjLib_KvUnexpectedKeyError(Object:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[])
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -46,7 +46,7 @@ stock bool:ObjLib_KvUnexpectedKeyError(Object:object, ObjectType:typeDescriptor,
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           object,                              // object
+                           obj,                                 // object
                            ObjLibError_KvUnexpectedKey,         // errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -73,7 +73,7 @@ stock bool:ObjLib_KvUnexpectedKeyError(Object:object, ObjectType:typeDescriptor,
 /**
  * Triggers an unexpected section error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -83,7 +83,7 @@ stock bool:ObjLib_KvUnexpectedKeyError(Object:object, ObjectType:typeDescriptor,
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvUnexpectedSectionError(Object:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:sectionName[])
+stock bool:ObjLib_KvUnexpectedSectionError(Object:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:sectionName[])
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -91,7 +91,7 @@ stock bool:ObjLib_KvUnexpectedSectionError(Object:object, ObjectType:typeDescrip
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           object,                              // object
+                           obj,                                 // object
                            ObjLibError_KvUnexpectedSection,     // errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -118,7 +118,7 @@ stock bool:ObjLib_KvUnexpectedSectionError(Object:object, ObjectType:typeDescrip
 /**
  * Triggers an invalid section error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -128,7 +128,7 @@ stock bool:ObjLib_KvUnexpectedSectionError(Object:object, ObjectType:typeDescrip
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvInvalidSectionError(Object:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:sectionName[])
+stock bool:ObjLib_KvInvalidSectionError(Object:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:sectionName[])
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -136,7 +136,7 @@ stock bool:ObjLib_KvInvalidSectionError(Object:object, ObjectType:typeDescriptor
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           object,                              // object
+                           obj,                                 // object
                            ObjLibError_KvInvalidSection,        // errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -163,7 +163,7 @@ stock bool:ObjLib_KvInvalidSectionError(Object:object, ObjectType:typeDescriptor
 /**
  * Triggers an constraint type mismatch error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -174,7 +174,7 @@ stock bool:ObjLib_KvInvalidSectionError(Object:object, ObjectType:typeDescriptor
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvConstraintTypeMismatch(Object:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[], ObjectType:constraintType)
+stock bool:ObjLib_KvConstraintTypeMismatch(Object:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[], ObjectType:constraintType)
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -182,7 +182,7 @@ stock bool:ObjLib_KvConstraintTypeMismatch(Object:object, ObjectType:typeDescrip
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           object,                              // object
+                           obj,                                 // object
                            ObjLibError_KvInvalidConstraint,     // errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -209,7 +209,7 @@ stock bool:ObjLib_KvConstraintTypeMismatch(Object:object, ObjectType:typeDescrip
 /**
  * Triggers a general type mismatch error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -221,7 +221,7 @@ stock bool:ObjLib_KvConstraintTypeMismatch(Object:object, ObjectType:typeDescrip
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvTypeMismatchError(Object:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[], ObjectDataType:expectedType, ObjectDataType:actualType)
+stock bool:ObjLib_KvTypeMismatchError(Object:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:keyName[], ObjectDataType:expectedType, ObjectDataType:actualType)
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -235,7 +235,7 @@ stock bool:ObjLib_KvTypeMismatchError(Object:object, ObjectType:typeDescriptor, 
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           object,                              // object
+                           obj,                                 // object
                            ObjLibError_KvTypeMismatch,          // errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -263,7 +263,7 @@ stock bool:ObjLib_KvTypeMismatchError(Object:object, ObjectType:typeDescriptor, 
 /**
  * Triggers a collection element type mismatch error.
  *
- * @param object            Current object.
+ * @param obj               Current object.
  * @param typeDescriptor    Type descriptor for object.
  * @param errorHandler      Error handler to use on errors.
  * @param parseContext      Object with parser settings.
@@ -274,7 +274,7 @@ stock bool:ObjLib_KvTypeMismatchError(Object:object, ObjectType:typeDescriptor, 
  * @return                  True if error was handled. If not handled this
  *                          function does not return at all.
  */
-stock bool:ObjLib_KvCollectionTypeMismatchError(Collection:object, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:elementName[], ObjectDataType:expectedType, ObjectDataType:actualType)
+stock bool:ObjLib_KvCollectionTypeMismatchError(Collection:obj, ObjectType:typeDescriptor, ObjLib_ErrorHandler:errorHandler, Object:parseContext, const String:elementName[], ObjectDataType:expectedType, ObjectDataType:actualType)
 {
     // Get path to current location in keyvalue tree.
     decl String:path[PLATFORM_MAX_PATH];
@@ -288,7 +288,7 @@ stock bool:ObjLib_KvCollectionTypeMismatchError(Collection:object, ObjectType:ty
     
     new Action:result = Plugin_Handled;
     if (ObjLib_HandleError(typeDescriptor,                      // typeDescriptor
-                           Object:object,                       // object
+                           Object:obj,                          // object
                            ObjLibError_KvCollectionTypeMismatch,// errorType
                            errorHandler,                        // customHandler
                            result,                              // result
@@ -320,7 +320,7 @@ stock bool:ObjLib_KvCollectionTypeMismatchError(Collection:object, ObjectType:ty
  * @param typeDescriptor    Related type descriptor.
  * @param errorType         Type of error.
  * @param message           Error message.
- * @param object            Related object, if available.
+ * @param obj               Related object, if available.
  * @param data              Object with parser settings.
  *                          (Type: ObjLib_KvParamsType)
  *
@@ -329,7 +329,7 @@ stock bool:ObjLib_KvCollectionTypeMismatchError(Collection:object, ObjectType:ty
  *                          Plugin_Continue - Skip current element, continue
  *                          parsing remaining keys.
  */
-public Action:ObjLib_KvErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:object, Object:data)
+public Action:ObjLib_KvErrorHandler(ObjectType:typeDescriptor, ObjLibError:errorType, const String:message[], Object:obj, Object:data)
 {
     new Object:parseContext = ObjLib_KvGetStoredParseContext(data);
     new bool:continueOnError = ObjLib_GetBool(parseContext, "continueOnError");
