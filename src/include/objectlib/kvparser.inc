@@ -99,7 +99,7 @@ new Object:TempParseContext = INVALID_OBJECT;
 
 /*____________________________________________________________________________*/
 
-#include "libraries/objectlib/kverrors"
+#include <objectlib/kverrors>
 
 /*____________________________________________________________________________*/
 
