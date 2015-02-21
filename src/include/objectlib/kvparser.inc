@@ -25,8 +25,9 @@
  * ============================================================================
  */
 
-#include "libraries/utilities"
-#include "libraries/arrays"
+// TODO: Use SMLIB or import functions.
+//#include "libraries/utilities"
+//#include "libraries/arrays"
 
 /*____________________________________________________________________________*/
 

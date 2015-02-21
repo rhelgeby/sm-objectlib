@@ -34,8 +34,9 @@
 
 #include <sourcemod>
 
-#include "libraries/arrays.inc"
-#include "libraries/utilities.inc"
+// TODO: Use SMLIB or import functions.
+//#include "libraries/arrays.inc"
+//#include "libraries/utilities.inc"
 
 /*____________________________________________________________________________*/
 
@@ -387,22 +388,22 @@ stock Handle:ObjLib_CloneTrie(Handle:trie, Handle:keys, keySize)
 /*____________________________________________________________________________*/
 
 // Object library core modules.
-#include "libraries/objectlib/objecttype"
-#include "libraries/objectlib/object"
+#include <objectlib/objecttype>
+#include <libraries/objectlib/object>
 
-#include "libraries/objectlib/constraints"
-#include "libraries/objectlib/constrainthandler"
+#include <libraries/objectlib/constraints>
+#include <libraries/objectlib/constrainthandler>
 
-#include "libraries/objectlib/collection"
+#include <libraries/objectlib/collection>
 
-#include "libraries/objectlib/errorhandler"
+#include <libraries/objectlib/errorhandler>
 
 // Accessors.
-#include "libraries/objectlib/accessors"
-#include "libraries/objectlib/collectionaccessors"
+#include <libraries/objectlib/accessors>
+#include <libraries/objectlib/collectionaccessors>
 
 // Parser modules.
-#include "libraries/objectlib/kvparser"
+#include <libraries/objectlib/kvparser>
 
 // Inspector tool modules.
-#include "libraries/objectlib/inspector"
+#include <libraries/objectlib/inspector>
