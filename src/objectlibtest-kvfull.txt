@@ -1,0 +1,66 @@
+root
+{
+    data_types
+    {
+        cell                10
+        bool                "true"      // Converted using lookup constraints.
+        float               2.5
+        string              "This is a string."
+    }
+    
+    nested_sections
+    {
+        value_a             1
+        section_a
+        {
+            valueB          2
+        }
+        section_b
+        {
+            valueC          3
+            section_c
+            {
+                value_d     4
+            }
+            section_d
+            {
+                value_e     5
+            }
+        }
+    }
+    
+    empty_section
+    {
+    }
+    
+    collection
+    {
+        // This section should trigger a type mismatch error.
+        collection_entry1
+        {
+            value           6
+        }
+        collection_entry2   7
+        collection_entry3   8
+    }
+    
+    collection_of_objects
+    {
+        dummy_object1
+        {
+            // This section should trigger an invalid section error.
+            dummy_key
+            {
+                test        "abc"
+            }
+        }
+        dummy_object2
+        {
+            dummy_key       10
+        }
+        dummy_object3
+        {
+            dummy_key       11
+        }
+    }
+}
