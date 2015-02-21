@@ -1755,10 +1755,10 @@ stock Handle:ObjLib_SetObjectNullKey(Object:obj, Handle:data)
 /*____________________________________________________________________________*/
 
 /** Internal use only! */
-stock ObjLib_SetKeyNull(Object:obj, keyIndex, bool:null)
+stock ObjLib_SetKeyNull(Object:obj, keyIndex, bool:isNull)
 {
     new Handle:nullKey = ObjLib_GetObjectNullKey(obj);
-    SetArrayCell(nullKey, keyIndex, null);
+    SetArrayCell(nullKey, keyIndex, isNull);
 }
 
 /*____________________________________________________________________________*/
